@@ -1,6 +1,6 @@
-# typescript-module-template
+# scrub-a-dub-dub
 
-Template repository for Typescript modules
+A utility for marking object properties for data sanitization
 
 ## Getting Started
 

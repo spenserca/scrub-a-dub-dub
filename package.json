@@ -1,5 +1,5 @@
 {
-  "name": "@spenserca/typescript-module-template",
+  "name": "@spenserca/scrub-a-dub-dub",
   "version": "1.0.0",
   "description": "Template for Typescript modules",
   "files": [
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spenserca/typescript-module-template.git"
+    "url": "git+https://github.com/spenserca/scrub-a-dub-dub.git"
   },
   "keywords": [
     "typescript"
@@ -29,9 +29,9 @@
   "author": "Spenser_Andreassen <spenserca@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/spenserca/typescript-module-template/issues"
+    "url": "https://github.com/spenserca/scrub-a-dub-dub/issues"
   },
-  "homepage": "https://github.com/spenserca/typescript-module-template#readme",
+  "homepage": "https://github.com/spenserca/scrub-a-dub-dub#readme",
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
