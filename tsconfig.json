@@ -9,7 +9,11 @@
     "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true
   },
-  "exclude": ["**/*.spec.ts", "chanceSetup.ts"]
+  "exclude": [
+    "**/*.spec.ts",
+    "chanceSetup.ts"
+  ]
 }
