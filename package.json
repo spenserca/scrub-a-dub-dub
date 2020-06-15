@@ -1,0 +1,175 @@
+{
+  "name": "@spenserca/typescript-module-template",
+  "version": "1.0.0",
+  "description": "Template for Typescript modules",
+  "files": [
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ],
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "prettier:check": "prettier-standard --check",
+    "prettier:format": "prettier-standard --format",
+    "test": "jest",
+    "verify": "npm run prettier:format && npm run prettier:check && npm test"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spenserca/typescript-module-template.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Spenser_Andreassen <spenserca@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/spenserca/typescript-module-template/issues"
+  },
+  "homepage": "https://github.com/spenserca/typescript-module-template#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/git": "^9.0.0",
+    "@types/chance": "^1.0.10",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "chance": "^1.1.4",
+    "jest": "^25.5.1",
+    "prettier-standard": "^16.3.0",
+    "semantic-release": "^17.0.7",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "Commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "prettier-standard --check --staged"
+    }
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "chanceSetup.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.spec.ts"
+    ],
+    "transform": {
+      "\\.ts$": "ts-jest"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true
+  },
+  "release": {
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "refactor",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            }
+          ],
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES",
+              "BREAKING"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true
+        }
+      ],
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "branch": "master",
+    "ci": true,
+    "verifyConditions": [
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "prepare": [
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ],
+    "generateNotes": {
+      "preset": "angular",
+      "parserOpts": {
+        "noteKeywords": [
+          "BREAKING CHANGE",
+          "BREAKING CHANGES",
+          "BREAKING"
+        ]
+      },
+      "writerOpts": {
+        "commitsSort": [
+          "subject",
+          "scope"
+        ]
+      }
+    }
+  }
+}

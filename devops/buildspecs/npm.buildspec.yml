@@ -1,0 +1,28 @@
+version: 0.2
+env:
+  secrets-manager:
+    GITHUB_PASSWORD: cicd-credentials:github_password
+    GITHUB_TOKEN: cicd-credentials:github_token
+    GITHUB_USER: cicd-credentials:github_username
+    NPM_PASSWORD: cicd-credentials:npm_password
+    NPM_TOKEN: cicd-credentials:npm_token
+    NPM_USERNAME: cicd-credentials:npm_username
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+    commands:
+      - if [ -z "$REPOSITORY" ]; then echo "[ERROR] Must set REPOSITORY environment variable"; exit 1; fi
+      - if [ -z "$SCM_OWNER" ]; then echo "[ERROR] Must set SCM_OWNER environment variable"; exit 1; fi
+      - git clone https://$GITHUB_USER:$GITHUB_PASSWORD@github.com/$OWNER/$REPOSITORY.git
+      - cd $REPOSITORY
+      - npm ci
+
+  pre_build:
+    commands:
+      - npm test
+
+  build:
+    commands:
+      - npm run build
+      - npx semantic-release
