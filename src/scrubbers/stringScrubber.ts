@@ -1,1 +1,1 @@
-export const scrubString = (toScrub: string): string => '********';
+export const scrubString = (toScrub?: string): string => '********';
