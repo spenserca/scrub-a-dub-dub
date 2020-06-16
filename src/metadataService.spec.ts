@@ -25,7 +25,11 @@ beforeEach(() => {
 
 it('gets the scrubber metadata for the property', () => {
   expect(getMetadataSpy).toHaveBeenCalledTimes(1);
-  expect(getMetadataSpy).toHaveBeenCalledWith('scrubberOptions', target, propertyKey);
+  expect(getMetadataSpy).toHaveBeenCalledWith(
+    'scrubberOptions',
+    target,
+    propertyKey
+  );
 });
 
 it('returns the scrubber options metadata', () => {
