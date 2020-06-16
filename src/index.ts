@@ -1,10 +1,10 @@
-import 'reflect-metadata';
+import { hasScrubberMetadata } from './metadataService';
 import { scrubString } from './scrubbers/stringScrubber';
 
 export const scrubObject = (toScrub: any): any => {
   const scrubbed = Object.keys(toScrub).reduce(
     (scrubbedValues: any, key: string) => {
-      if (Reflect.hasMetadata('scrubberOptions', toScrub, key)) {
+      if (hasScrubberMetadata(toScrub, key)) {
         scrubbedValues[key] = scrubString(toScrub[key]);
       }
 
