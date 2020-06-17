@@ -16,6 +16,7 @@
     "verify": "npm run prettier:format && npm run prettier:check && npm test"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/",
     "tag": "latest"
   },
