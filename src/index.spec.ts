@@ -4,12 +4,12 @@ import { chance } from '../chanceSetup';
 import { scrub } from './decorators/scrub';
 import { scrubObject } from './index';
 import { hasScrubberMetadata } from './metadataService';
-import { scrubString } from './scrubbers/stringScrubber';
+import { scrubValue } from './scrubbers/scrubber';
 
-jest.mock('./scrubbers/stringScrubber');
+jest.mock('./scrubbers/scrubber');
 jest.mock('./metadataService');
 
-const scrubStringMock = scrubString as jest.Mock;
+const scrubValueMock = scrubValue as jest.Mock;
 const hasScrubberMetadataMock = hasScrubberMetadata as jest.Mock;
 
 class TestClass {
@@ -40,7 +40,7 @@ beforeEach(() => {
   toScrub = new TestClass(expectedPropertyOne, actualPropertyToScrub);
 
   expectedScrubbedString = chance.string();
-  scrubStringMock.mockReturnValue(expectedScrubbedString);
+  scrubValueMock.mockReturnValue(expectedScrubbedString);
 
   when(hasScrubberMetadataMock)
     .calledWith(toScrub, 'propertyOne')
@@ -65,7 +65,7 @@ it('checks to see if the property has scrubber metadata', () => {
 describe('when a property does not need to be scrubbed', () => {
   it(`does not get the scrubbed value`, () => {
     objectKeysNotToScrub.forEach((key: string) => {
-      expect(scrubStringMock).not.toHaveBeenCalledWith(toScrub[key]);
+      expect(scrubValueMock).not.toHaveBeenCalledWith(toScrub[key]);
     });
   });
 
@@ -81,7 +81,7 @@ describe('when a property needs to be scrubbed', () => {
 
   it('gets the scrubbed value', () => {
     objectKeysToScrub.forEach((key: string) => {
-      expect(scrubStringMock).toHaveBeenCalledWith(toScrub[key]);
+      expect(scrubValueMock).toHaveBeenCalledWith(toScrub[key]);
     });
   });
 

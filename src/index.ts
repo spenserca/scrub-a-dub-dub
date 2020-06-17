@@ -1,11 +1,11 @@
 import { hasScrubberMetadata } from './metadataService';
-import { scrubString } from './scrubbers/stringScrubber';
+import { scrubValue } from './scrubbers/scrubber';
 
 export const scrubObject = (toScrub: any): any => {
   const scrubbed = Object.keys(toScrub).reduce(
     (scrubbedValues: any, key: string) => {
       if (hasScrubberMetadata(toScrub, key)) {
-        scrubbedValues[key] = scrubString(toScrub[key]);
+        scrubbedValues[key] = scrubValue(toScrub[key]);
       }
 
       return scrubbedValues;
