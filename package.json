@@ -28,7 +28,7 @@
     "typescript"
   ],
   "author": "Spenser_Andreassen <spenserca@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/spenserca/scrub-a-dub-dub/issues"
   },
