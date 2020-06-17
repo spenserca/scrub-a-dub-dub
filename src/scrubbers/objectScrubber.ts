@@ -1,5 +1,5 @@
-import { hasScrubberMetadata } from './metadataService';
-import { scrubValue } from './scrubbers/scrubber';
+import { hasScrubberMetadata } from '../metadataService';
+import { scrubValue } from './scrubber';
 
 export const scrubObject = (toScrub: any): any => {
   const scrubbed = Object.keys(toScrub).reduce(

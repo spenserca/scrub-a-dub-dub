@@ -1,5 +1,6 @@
 import { chance } from '../../chanceSetup';
 import { scrubDate } from './dateScrubber';
+import { scrubObject } from './objectScrubber';
 import { scrubValue } from './scrubber';
 import { scrubString } from './stringScrubber';
 
@@ -102,5 +103,17 @@ describe('scrubbing a date value', () => {
 
   it('returns the default scrubbed date value', () => {
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('scrubbing an object', () => {
+  let actual: any;
+  let expected: any;
+  let toScrub: any;
+
+  beforeEach(() => {
+    toScrub = { [chance.string()]: chance.string() };
+
+    actual = scrubValue(toScrub);
   });
 });
