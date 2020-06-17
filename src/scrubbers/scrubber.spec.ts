@@ -1,5 +1,6 @@
 import { chance } from '../../chanceSetup';
 import { scrubDate } from './dateScrubber';
+import { scrubNumber } from './numberScrubber';
 import { scrubObject } from './objectScrubber';
 import { scrubValue } from './scrubber';
 import { scrubString } from './stringScrubber';
@@ -7,10 +8,12 @@ import { scrubString } from './stringScrubber';
 jest.mock('./stringScrubber');
 jest.mock('./dateScrubber');
 jest.mock('./objectScrubber');
+jest.mock('./numberScrubber');
 
 const scrubStringMock = scrubString as jest.Mock;
 const scrubDateMock = scrubDate as jest.Mock;
 const scrubObjectMock = scrubObject as jest.Mock;
+const scrubNumberMock = scrubNumber as jest.Mock;
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -128,6 +131,30 @@ describe('scrubbing an object', () => {
   });
 
   it('returns the scrubbed object', () => {
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('scrubbing a number', () => {
+  let actual: any;
+  let expected: number;
+  let toScrub: number;
+
+  beforeEach(() => {
+    expected = chance.integer();
+    toScrub = chance.integer();
+
+    scrubNumberMock.mockReturnValue(expected);
+
+    actual = scrubValue(toScrub);
+  });
+
+  it('gets the scrubbed number', () => {
+    expect(scrubNumberMock).toHaveBeenCalledTimes(1);
+    expect(scrubNumberMock).toHaveBeenCalledWith(toScrub);
+  });
+
+  it('returns the scrubbed number', () => {
     expect(actual).toEqual(expected);
   });
 });

@@ -1,10 +1,11 @@
 import { scrubDate } from './dateScrubber';
+import { scrubNumber } from './numberScrubber';
 import { scrubObject } from './objectScrubber';
 import { scrubString } from './stringScrubber';
 
 export const scrubValue = (toScrub: any): any => {
-  if (typeof toScrub === 'string' || typeof toScrub === 'undefined') {
-    return scrubString(toScrub);
+  if (typeof toScrub === 'number') {
+    return scrubNumber(toScrub);
   }
   if (toScrub instanceof Date) {
     return scrubDate(toScrub);
