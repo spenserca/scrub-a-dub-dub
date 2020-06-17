@@ -1,5 +1,4 @@
 import { when } from 'jest-when';
-import 'reflect-metadata';
 import { chance } from '../../chanceSetup';
 import { scrub } from '../decorators/scrub';
 import { hasScrubberMetadata } from '../metadataService';

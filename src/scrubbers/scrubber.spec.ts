@@ -6,9 +6,11 @@ import { scrubString } from './stringScrubber';
 
 jest.mock('./stringScrubber');
 jest.mock('./dateScrubber');
+jest.mock('./objectScrubber');
 
 const scrubStringMock = scrubString as jest.Mock;
 const scrubDateMock = scrubDate as jest.Mock;
+const scrubObjectMock = scrubObject as jest.Mock;
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -113,7 +115,19 @@ describe('scrubbing an object', () => {
 
   beforeEach(() => {
     toScrub = { [chance.string()]: chance.string() };
+    expected = { [chance.string()]: chance.string() };
+
+    scrubObjectMock.mockReturnValue(expected);
 
     actual = scrubValue(toScrub);
+  });
+
+  it('gets the scrubbed object value', () => {
+    expect(scrubObjectMock).toHaveBeenCalledTimes(1);
+    expect(scrubObjectMock).toHaveBeenCalledWith(toScrub);
+  });
+
+  it('returns the scrubbed object', () => {
+    expect(actual).toEqual(expected);
   });
 });
