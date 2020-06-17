@@ -1,7 +1,7 @@
 {
   "name": "@spenserca/scrub-a-dub-dub",
   "version": "1.0.3",
-  "description": "Template for Typescript modules",
+  "description": "A utility for marking object properties for data sanitization",
   "files": [
     "src/**/*.js",
     "src/**/*.d.ts"
