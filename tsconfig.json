@@ -13,5 +13,6 @@
     "inlineSourceMap": true,
     "inlineSources": true
   },
-  "exclude": ["**/*.spec.ts", "chanceSetup.ts"]
+  "exclude": ["**/*.spec.ts", "chanceSetup.ts"],
+  "include": ["**/*.js"]
 }
