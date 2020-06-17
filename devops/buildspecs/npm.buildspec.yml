@@ -14,7 +14,7 @@ phases:
     commands:
       - if [ -z "$REPOSITORY" ]; then echo "[ERROR] Must set REPOSITORY environment variable"; exit 1; fi
       - if [ -z "$SCM_OWNER" ]; then echo "[ERROR] Must set SCM_OWNER environment variable"; exit 1; fi
-      - git clone https://$GITHUB_USER:$GITHUB_PASSWORD@github.com/$OWNER/$REPOSITORY.git
+      - git clone https://$GITHUB_USER:$GITHUB_PASSWORD@github.com/$SCM_OWNER/$REPOSITORY.git
       - cd $REPOSITORY
       - npm ci
 
