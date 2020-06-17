@@ -14,5 +14,5 @@
     "inlineSources": true
   },
   "exclude": ["**/*.spec.ts", "chanceSetup.ts"],
-  "include": ["**/*.js"]
+  "include": ["**/*.ts"]
 }
