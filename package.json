@@ -1,6 +1,6 @@
 {
   "name": "@spenserca/scrub-a-dub-dub",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Template for Typescript modules",
   "files": [
     "src/**/*.js",
