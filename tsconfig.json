@@ -10,8 +10,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "inlineSourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    "sourceMap": true
   },
   "exclude": ["**/*.spec.ts", "chanceSetup.ts"],
   "include": ["**/*.ts"]
