@@ -4,6 +4,7 @@
   "description": "A utility for marking object properties for data sanitization",
   "files": [
     "src/**/*.js",
+    "src/**/*.ts",
     "src/**/*.js.map",
     "src/**/*.d.ts",
     "src/**/*.d.ts.map"
