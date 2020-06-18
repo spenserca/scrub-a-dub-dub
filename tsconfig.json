@@ -14,5 +14,5 @@
     "sourceMap": true
   },
   "exclude": ["**/*.spec.ts", "chanceSetup.ts"],
-  "include": ["**/*.ts"]
+  "include": ["src"]
 }
