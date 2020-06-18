@@ -11,6 +11,6 @@
     "experimentalDecorators": true,
     "sourceMap": true
   },
-  "exclude": ["**/*.spec.ts", "chanceSetup.ts"],
-  "include": ["src"]
+  "exclude": ["src/**/*.spec.ts", "chanceSetup.ts"],
+  "include": ["src/**/*"]
 }
