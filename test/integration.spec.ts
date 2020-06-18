@@ -1,5 +1,4 @@
-import { scrub } from '../src/decorators/scrub';
-import { scrubObject } from '../src/scrubbers/objectScrubber';
+import { scrub, scrubObject } from '../src';
 
 // TODO: make this an actual test
 it('should do something', () => {
