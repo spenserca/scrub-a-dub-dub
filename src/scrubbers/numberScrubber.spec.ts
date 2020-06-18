@@ -8,5 +8,5 @@ beforeEach(() => {
 });
 
 it('returns the default scrubbed number', () => {
-  expect(actual).toBeUndefined();
+  expect(actual).toBe(8675309);
 });
