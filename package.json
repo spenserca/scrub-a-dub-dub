@@ -3,18 +3,14 @@
   "version": "1.0.10",
   "description": "A utility for marking object properties for data sanitization",
   "files": [
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.js.map",
-    "src/**/*.d.ts",
-    "src/**/*.d.ts.map"
+    "dist"
   ],
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "scripts": {
-    "build": "tsc -p .",
-    "prettier:check": "prettier-standard --check",
-    "prettier:format": "prettier-standard --format",
+    "build": "rm -rf dist && tsc -p .",
+    "prettier:check": "prettier-standard --check --staged",
+    "prettier:format": "prettier-standard --format --staged",
     "test": "jest",
     "verify": "npm run prettier:format && npm run prettier:check && npm test"
   },
@@ -64,7 +60,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "Commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "prettier-standard --check --staged"
+      "pre-commit": "npm run prettier:format"
     }
   },
   "jest": {

@@ -3,14 +3,14 @@
     "target": "ES6",
     "module": "commonjs",
     "declaration": true,
-    "outDir": ".",
+    "outDir": "dist",
     "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "inlineSourceMap": true
   },
-  "exclude": ["src/**/*.spec.ts", "chanceSetup.ts"],
-  "include": ["src/**/*"]
+  "exclude": ["src/**/*.spec.ts"],
+  "include": ["src"]
 }
