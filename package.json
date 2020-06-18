@@ -3,11 +3,11 @@
   "version": "1.0.14",
   "description": "A utility for marking object properties for data sanitization",
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "**/*.js",
+    "**/*.d.ts"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc -p .",
     "prettier:check": "prettier-standard --check --staged",
