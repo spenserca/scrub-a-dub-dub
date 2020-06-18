@@ -3,7 +3,7 @@
   "version": "1.0.13",
   "description": "A utility for marking object properties for data sanitization",
   "files": [
-    "dist/src"
+    "dist"
   ],
   "main": "src/index.js",
   "types": "src/index.d.ts",
