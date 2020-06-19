@@ -111,30 +111,6 @@ describe('scrubbing a date value', () => {
   });
 });
 
-describe('scrubbing an object with out scrubber metadata', () => {
-  let actual: any;
-  let expected: any;
-  let toScrub: any;
-
-  beforeEach(() => {
-    toScrub = { [chance.string()]: chance.string() };
-    expected = { [chance.string()]: chance.string() };
-
-    scrubObjectMock.mockReturnValue(expected);
-
-    actual = scrubValue(toScrub);
-  });
-
-  it.skip('gets the scrubbed object value', () => {
-    expect(scrubObjectMock).toHaveBeenCalledTimes(1);
-    expect(scrubObjectMock).toHaveBeenCalledWith(toScrub);
-  });
-
-  it.skip('returns the scrubbed object', () => {
-    expect(actual).toEqual(expected);
-  });
-});
-
 describe('scrubbing a number', () => {
   let actual: any;
   let expected: number;
