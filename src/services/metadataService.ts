@@ -1,11 +1,12 @@
 import 'reflect-metadata';
+import { ScrubberOptions } from '../decorators/scrub';
 
 const SCRUBBER_OPTIONS_METADATA_KEY = 'scrubberOptions';
 
 export const getScrubberMetadataForProperty = (
   target: any,
   propertyKey: string
-) => {
+): ScrubberOptions => {
   return Reflect.getMetadata(
     SCRUBBER_OPTIONS_METADATA_KEY,
     target,

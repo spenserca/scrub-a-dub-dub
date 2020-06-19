@@ -87,6 +87,7 @@
       "json",
       "node"
     ],
+    "resetMocks": true,
     "testEnvironment": "node",
     "testMatch": [
       "**/*.spec.ts"
