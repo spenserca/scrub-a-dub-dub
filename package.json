@@ -60,7 +60,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "Commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "prettier-standard --format --staged"
+      "pre-commit": "prettier-standard --check --staged"
     }
   },
   "jest": {
