@@ -16,6 +16,11 @@ it('scrubs the properties that are decorated', () => {
 
     @scrub()
     childDateToScrub = new Date();
+
+    @scrub({
+      scrubFunction: () => "spenser's child was not here"
+    })
+    childPropToScrubWithCustomScrubber = "spenser's child was here";
   }
 
   class ParentClass {
@@ -34,6 +39,11 @@ it('scrubs the properties that are decorated', () => {
     @scrub()
     parentDateToScrub = new Date();
 
+    @scrub({
+      scrubFunction: () => 'spenser was not here'
+    })
+    parentPropToScrubWithCustomScrubber = 'spenser was here';
+
     child: ChildClass;
 
     constructor () {
@@ -50,6 +60,9 @@ it('scrubs the properties that are decorated', () => {
   expect(scrubbed.parentStringToScrub).toEqual('********');
   expect(scrubbed.parentDate).toEqual(toScrub.parentDate);
   expect(scrubbed.parentDateToScrub).toEqual(new Date(9999, 11, 31));
+  expect(scrubbed.parentPropToScrubWithCustomScrubber).toEqual(
+    'spenser was not here'
+  );
 
   expect(scrubbed.child.childNumber).toEqual(toScrub.child.childNumber);
   expect(scrubbed.child.childNumberToScrub).toEqual(8675309);
@@ -57,4 +70,7 @@ it('scrubs the properties that are decorated', () => {
   expect(scrubbed.child.childStringToScrub).toEqual('********');
   expect(scrubbed.child.childDate).toEqual(toScrub.child.childDate);
   expect(scrubbed.child.childDateToScrub).toEqual(new Date(9999, 11, 31));
+  expect(scrubbed.child.childPropToScrubWithCustomScrubber).toEqual(
+    "spenser's child was not here"
+  );
 });
