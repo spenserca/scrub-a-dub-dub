@@ -11,8 +11,8 @@
   "types": "index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc -p .",
-    "prettier:check": "prettier-standard --check --staged",
-    "prettier:format": "prettier-standard --format --staged",
+    "prettier:check": "prettier-standard --check",
+    "prettier:format": "prettier-standard --format",
     "test": "jest",
     "verify": "npm run prettier:format && npm run prettier:check && npm test"
   },
@@ -62,7 +62,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "Commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run prettier:format"
+      "pre-commit": "prettier-standard --format --staged"
     }
   },
   "jest": {
