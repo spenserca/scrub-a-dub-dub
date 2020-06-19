@@ -3,7 +3,9 @@
   "version": "1.0.19",
   "description": "A utility for marking object properties for data sanitization",
   "files": [
-    "dist"
+    "**/*.js",
+    "**/*.d.ts",
+    "!coverage"
   ],
   "main": "index.js",
   "types": "index.d.ts",
