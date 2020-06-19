@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { chance } from '../chanceSetup';
+import { chance } from '../../chanceSetup';
 import {
   getScrubberMetadataForProperty,
   hasScrubberMetadata

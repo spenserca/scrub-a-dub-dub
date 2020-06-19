@@ -1,4 +1,4 @@
-import { scrub, scrubObject } from '../index';
+import { scrub, scrubObject } from '../src';
 
 it('scrubs the properties that are decorated', () => {
   class ChildClass {

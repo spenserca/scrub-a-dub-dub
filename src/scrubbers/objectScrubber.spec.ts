@@ -1,12 +1,12 @@
 import { when } from 'jest-when';
 import { chance } from '../../chanceSetup';
 import { scrub } from '../decorators/scrub';
-import { hasScrubberMetadata } from '../metadataService';
+import { hasScrubberMetadata } from '../services/metadataService';
 import { scrubObject } from './objectScrubber';
 import { scrubValue } from './scrubber';
 
 jest.mock('./scrubber');
-jest.mock('../metadataService');
+jest.mock('../services/metadataService');
 
 const scrubValueMock = scrubValue as jest.Mock;
 const hasScrubberMetadataMock = hasScrubberMetadata as jest.Mock;
