@@ -1,6 +1,6 @@
 {
   "name": "@spenserca/scrub-a-dub-dub",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "A utility for marking object properties for data sanitization",
   "files": [
     "dist"
