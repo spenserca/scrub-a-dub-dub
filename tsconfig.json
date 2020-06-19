@@ -3,8 +3,7 @@
     "target": "ES6",
     "module": "commonjs",
     "declaration": true,
-    "outDir": ".",
-    "rootDir": "src",
+    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,5 +11,5 @@
     "inlineSourceMap": true
   },
   "exclude": ["src/**/*.spec.ts"],
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
+import { scrub } from '..';
 import { chance } from '../../chanceSetup';
-import { scrub } from '../decorators/scrub';
 import { hasScrubberMetadata } from '../services/metadataService';
 import { scrubObject } from './objectScrubber';
 import { scrubValue } from './scrubber';
