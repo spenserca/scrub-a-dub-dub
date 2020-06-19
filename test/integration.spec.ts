@@ -1,44 +1,60 @@
 import { scrub, scrubObject } from '../src';
 
-// TODO: make this an actual test
-it('should do something', () => {
-  class myChildClass {
-    myChildNumber = 54321;
+it('scrubs the properties that are decorated', () => {
+  class ChildClass {
+    childNumber = 54321;
 
     @scrub()
-    myChildNumberToScrub = 9876;
+    childNumberToScrub = 9876;
 
-    myChildString = '54321';
+    childString = '54321';
 
     @scrub()
-    myChildStringToScrub = '09876';
+    childStringToScrub = '09876';
+
+    childDate = new Date();
+
+    @scrub()
+    childDateToScrub = new Date();
   }
 
-  class myTestClass {
-    myNumber = 12345;
+  class ParentClass {
+    parentNumber = 12345;
 
     @scrub()
-    myNumberToScrub = 67890;
+    parentNumberToScrub = 67890;
 
-    myString = '12345';
+    parentString = '12345';
 
     @scrub()
-    myStringToScrub = '67890';
+    parentStringToScrub = '67890';
 
-    myChild: myChildClass;
+    parentDate = new Date();
+
+    @scrub()
+    parentDateToScrub = new Date();
+
+    child: ChildClass;
 
     constructor () {
-      this.myChild = new myChildClass();
+      this.child = new ChildClass();
     }
   }
 
-  const toScrub = new myTestClass();
-
-  console.log(JSON.stringify(toScrub, null, 2));
-
+  const toScrub = new ParentClass();
   const scrubbed = scrubObject(toScrub);
 
-  console.log(JSON.stringify(scrubbed, null, 2));
+  expect(scrubbed.parentNumber).toEqual(toScrub.parentNumber);
+  expect(scrubbed.parentNumberToScrub).toEqual(8675309);
+  expect(scrubbed.parentString).toEqual(toScrub.parentString);
+  expect(scrubbed.parentStringToScrub).toEqual('********');
+  expect(scrubbed.parentDate).toEqual(toScrub.parentDate);
+  expect(scrubbed.parentDateToScrub).toEqual(new Date(9999, 11, 31));
 
-  expect(true).toBeTruthy();
+  expect(scrubbed.child.childNumber).toEqual(toScrub.child.childNumber);
+  expect(scrubbed.child.childNumberToScrub).toEqual(8675309);
+  expect(scrubbed.child.childString).toEqual(toScrub.child.childString);
+  expect(scrubbed.child.childStringToScrub).toEqual('********');
+  expect(scrubbed.child.childDate).toEqual(toScrub.child.childDate);
+  expect(scrubbed.child.childDateToScrub).toEqual(new Date(9999, 11, 31));
 });
