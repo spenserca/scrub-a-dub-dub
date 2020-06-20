@@ -1,5 +1,10 @@
 language: node_js
+node_js:
+  - 12
 install:
-  - npm i
-script:
-  - npm run verify
+  - npm ci
+stages:
+  - name: verify
+    script: npm run verify
+  - name: deploy
+    script: echo deployment test
