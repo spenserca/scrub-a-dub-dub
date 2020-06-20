@@ -7,4 +7,5 @@ stages:
   - name: verify
     script: npm run verify
   - name: deploy
+    if: branch = master
     script: echo deployment test
