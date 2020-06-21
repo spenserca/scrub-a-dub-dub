@@ -23,8 +23,7 @@ jobs:
       - name: build
         run: npm run build
       - name: deploy
-        run: npx semantic-release
+        run: npx semantic-release@15.1.3
         env:
-          GH_TOKEN: ${{ secrets.SEM_REL }}
-          GIT_CREDENTIALS: ${{ secrets.GIT_CREDS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
