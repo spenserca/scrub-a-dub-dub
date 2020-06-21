@@ -8,20 +8,19 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Validate and Deploy
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm ci
-      - run: npm run verify
-      - run: cd $GITHUB_WORKSPACE
-      - run: npm run build
-      - run: npx semantic-release
+        run: npm ci
+      - name: validate
+        run: npm run verify
+      - name: build
+        run: npm run build
+      - name: deploy
+        run: npx semantic-release
         env:
-          GITHUB_PASSWORD: ${{ secrets.GH_PASSWORD }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_USER: ${{ secrets.GH_USER }}
-          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_USERNAME: ${{ secrets.NPM_USERNAME }}
