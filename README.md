@@ -8,10 +8,10 @@ This library provides these defaults to apply during scrubbing:
 
 | type       | default      |
 | ---------- | ------------ |
-| string     | **\*\*\*\*** |
+| string     | ********     |
 | number     | 8675309      |
 | Date       | 12/31/9999   |
-| all others | **\*\*\*\*** |
+| all others | ********     |
 
 You can use the default values by following these steps:
 
