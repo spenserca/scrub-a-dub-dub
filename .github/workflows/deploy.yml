@@ -1,0 +1,32 @@
+name: build and deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate PR
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm ci
+      - run: npm run verify
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to NPM
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npx semantic-release
+        env:
+          GITHUB_PASSWORD: ${{ secrets.GH_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_USER: ${{ secrets.GH_USER }}
+          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_USERNAME: ${{ secrets.NPM_USERNAME }}
