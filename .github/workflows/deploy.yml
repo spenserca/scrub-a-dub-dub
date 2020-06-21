@@ -16,6 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run verify
       - run: cd $GITHUB_WORKSPACE
+      - run: npm run build
       - run: npx semantic-release
         env:
           GITHUB_PASSWORD: ${{ secrets.GH_PASSWORD }}
