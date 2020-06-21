@@ -3,7 +3,7 @@ name: validate pr
 on: [pull_request]
 
 jobs:
-  validate:
+  validate_pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
