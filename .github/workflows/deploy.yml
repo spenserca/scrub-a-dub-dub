@@ -1,8 +1,6 @@
 name: build and deploy
 
 on:
-  pull_request:
-    branches: [semantic-release]
   push:
     branches: [master]
 
@@ -25,7 +23,7 @@ jobs:
         with:
           node-version: '12.x'
       - run: cd $GITHUB_WORKSPACE
-      - run: npx semantic-release -d
+      - run: npx semantic-release
         env:
           GITHUB_PASSWORD: ${{ secrets.GH_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
