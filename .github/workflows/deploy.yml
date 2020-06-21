@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - run: cd $GITHUB_WORKSPACE
       - run: npx semantic-release
         env:
           GITHUB_PASSWORD: ${{ secrets.GH_PASSWORD }}
