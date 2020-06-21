@@ -13,3 +13,6 @@ jobs:
           node-version: '12.x'
       - run: npm ci
       - run: npm run verify
+      - run: ls -a
+      - run: cd $GITHUB_WORKSPACE
+      - run: ls -a
