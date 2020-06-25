@@ -1,9 +1,6 @@
 import 'reflect-metadata';
 import { chance } from '../../chanceSetup';
-import {
-  getScrubberMetadataForProperty,
-  hasScrubberMetadata
-} from './metadataService';
+import { getMetadataForProperty, hasMetadata } from './metadataService';
 
 jest.mock('reflect-metadata');
 
@@ -23,42 +20,48 @@ beforeEach(() => {
   target = { [propertyKey]: chance.string() };
 });
 
-describe('getting scrubber metadata for a property', () => {
+describe('getting metadata for a property', () => {
+  let metadataKey: string;
+
   beforeEach(() => {
     expected = { [chance.string()]: chance.string() };
+    metadataKey = chance.string();
 
     getMetadataSpy.mockReturnValue(expected);
 
-    actual = getScrubberMetadataForProperty(target, propertyKey);
+    actual = getMetadataForProperty(target, propertyKey, metadataKey);
   });
 
-  it('gets the scrubber metadata for the property', () => {
+  it('gets the metadata for the property', () => {
     expect(getMetadataSpy).toHaveBeenCalledTimes(1);
     expect(getMetadataSpy).toHaveBeenCalledWith(
-      SCRUBBER_OPTIONS_METADATA_KEY,
+      metadataKey,
       target,
       propertyKey
     );
   });
 
-  it('returns the scrubber options metadata', () => {
+  it('returns the metadata object', () => {
     expect(actual).toBe(expected);
   });
 });
 
 describe('checking to see if a property has metadata', () => {
+  let metadataKey: string;
+
   beforeEach(() => {
     expected = chance.bool();
+    metadataKey = chance.string();
 
     hasMetadataSpy.mockReturnValue(expected);
 
-    actual = hasScrubberMetadata(target, propertyKey);
+    actual = hasMetadata(target, propertyKey, metadataKey);
   });
 
   it('checks to see if the property has scrubber metadata', () => {
     expect(hasMetadataSpy).toHaveBeenCalledTimes(1);
     expect(hasMetadataSpy).toHaveBeenCalledWith(
-      SCRUBBER_OPTIONS_METADATA_KEY,
+      metadataKey,
       target,
       propertyKey
     );

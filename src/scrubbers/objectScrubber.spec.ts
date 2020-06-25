@@ -2,8 +2,8 @@ import { when } from 'jest-when';
 import { scrub } from '..';
 import { chance } from '../../chanceSetup';
 import {
-  getScrubberMetadataForProperty,
-  hasScrubberMetadata
+  getMetadataForProperty,
+  hasMetadata
 } from '../services/metadataService';
 import { scrubObject } from './objectScrubber';
 import { scrubValue } from './scrubber';
@@ -12,8 +12,8 @@ jest.mock('./scrubber');
 jest.mock('../services/metadataService');
 
 const scrubValueMock = scrubValue as jest.Mock;
-const hasScrubberMetadataMock = hasScrubberMetadata as jest.Mock;
-const getScrubberMetadataForPropertyMock = getScrubberMetadataForProperty as jest.Mock;
+const hasMetadataMock = hasMetadata as jest.Mock;
+const getMetadataForPropertyMock = getMetadataForProperty as jest.Mock;
 
 class TestClass {
   stringNotToScrub: string;
@@ -46,26 +46,28 @@ beforeEach(() => {
   expectedScrubbedString = chance.string();
   scrubValueMock.mockReturnValue(expectedScrubbedString);
 
-  when(hasScrubberMetadataMock)
+  when(hasMetadataMock)
     .calledWith(toScrub, 'propertyOne')
     .mockReturnValue(false);
 
-  when(hasScrubberMetadataMock)
+  when(hasMetadataMock)
     .calledWith(toScrub, 'stringToScrub')
     .mockReturnValue(true);
 
   propertyMetadata = { [chance.string()]: chance.string() };
-  getScrubberMetadataForPropertyMock.mockReturnValue(propertyMetadata);
+  getMetadataForPropertyMock.mockReturnValue(propertyMetadata);
 
   actual = scrubObject(toScrub);
 });
 
 it('checks to see if the property has scrubber metadata', () => {
-  expect(hasScrubberMetadataMock).toHaveBeenCalledTimes(
-    Object.keys(toScrub).length
-  );
+  expect(hasMetadataMock).toHaveBeenCalledTimes(Object.keys(toScrub).length);
   Object.keys(toScrub).forEach((key: string) => {
-    expect(hasScrubberMetadataMock).toHaveBeenCalledWith(toScrub, key);
+    expect(hasMetadataMock).toHaveBeenCalledWith(
+      toScrub,
+      key,
+      'scrubberOptions'
+    );
   });
 });
 
@@ -85,11 +87,12 @@ describe('when a property does not have scrubber metadata', () => {
 
 describe('when a property has scrubber metadata', () => {
   it('gets the scrubber metadata', () => {
-    expect(getScrubberMetadataForPropertyMock).toHaveBeenCalledTimes(1);
+    expect(getMetadataForPropertyMock).toHaveBeenCalledTimes(1);
     objectKeysToScrub.forEach((key: string) => {
-      expect(getScrubberMetadataForPropertyMock).toHaveBeenCalledWith(
+      expect(getMetadataForPropertyMock).toHaveBeenCalledWith(
         toScrub,
-        key
+        key,
+        'scrubberOptions'
       );
     });
   });

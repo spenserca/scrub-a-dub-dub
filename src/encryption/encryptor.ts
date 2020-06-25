@@ -14,5 +14,5 @@ export const encryptValue = (
   metadataForProperty: EncryptionOptions
 ): any => {
   const secretPassphrase = metadataForProperty.passphrase;
-  return AES.encrypt('my message', secretPassphrase).toString();
+  return AES.encrypt(toEncrypt.toString(), secretPassphrase).toString();
 };

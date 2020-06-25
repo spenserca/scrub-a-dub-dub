@@ -4,22 +4,22 @@ import {
   getMetadataForProperty,
   hasMetadata
 } from '../services/metadataService';
-import { encryptValue } from './encryptor';
+import { decryptValue } from './decryptor';
 
 const ENCRYPTION_OPTIONS_METADATA_KEY = 'encryptionOptions';
 
-export const encryptObject = (toEncrypt: any) => {
-  const encrypted = Object.entries(toEncrypt).reduce(
+export const decryptObject = (toDecrypt: any) => {
+  const decrypted = Object.entries(toDecrypt).reduce(
     (scrubbedValues: any, [key, value]) => {
       if (isObjectWithKeys(value)) {
-        scrubbedValues[key] = encryptObject(value);
-      } else if (hasMetadata(toEncrypt, key, ENCRYPTION_OPTIONS_METADATA_KEY)) {
+        scrubbedValues[key] = decryptObject(value);
+      } else if (hasMetadata(toDecrypt, key, ENCRYPTION_OPTIONS_METADATA_KEY)) {
         const metadataForProperty = getMetadataForProperty<EncryptionOptions>(
-          toEncrypt,
+          toDecrypt,
           key,
           ENCRYPTION_OPTIONS_METADATA_KEY
         );
-        scrubbedValues[key] = encryptValue(toEncrypt[key], metadataForProperty);
+        scrubbedValues[key] = decryptValue(toDecrypt[key], metadataForProperty);
       }
 
       return scrubbedValues;
@@ -27,5 +27,5 @@ export const encryptObject = (toEncrypt: any) => {
     {}
   );
 
-  return { ...toEncrypt, ...encrypted };
+  return { ...toDecrypt, ...decrypted };
 };

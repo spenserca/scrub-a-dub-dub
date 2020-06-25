@@ -1,51 +1,41 @@
+import { AES } from 'crypto-js';
 import { encrypt } from '../src/decorators/encrypt';
 import { encryptObject } from '../src/encryption/objectEncryptor';
+import CryptoJS = require('crypto-js');
 
 class ChildClass {
-  childNumber = 54321;
+  @encrypt({
+    passphrase: 'a47edfc9-cd44-4222-9e3d-a41702119056'
+  })
+  childNumberToEncrypt = 9876;
 
   @encrypt({
-    passphrase: 'passphrase'
+    passphrase: '6ee11e6c-5909-48b3-abbe-81cb39a62d82'
   })
-  childNumberToScrub = 9876;
-
-  childString = '54321';
+  childStringToEncrypt = '09876';
 
   @encrypt({
-    passphrase: 'passphrase'
+    passphrase: 'a5c4b87e-0a0f-4dce-981a-85b0c05eb699'
   })
-  childStringToScrub = '09876';
-
-  childDate = new Date();
-
-  @encrypt({
-    passphrase: 'passphrase'
-  })
-  childDateToScrub = new Date();
+  childDateToEncrypt = new Date();
 }
 
-it('scrubs the properties that are decorated', () => {
+it('encrypts the properties that are decorated', () => {
   class ParentClass {
-    parentNumber = 12345;
+    @encrypt({
+      passphrase: '5e60d03d-0061-45a9-b328-16f53f01401c'
+    })
+    parentNumberToEncrypt = 67890;
 
     @encrypt({
-      passphrase: 'passphrase'
+      passphrase: '7280006e-e59b-4633-a715-a6b8176f780f'
     })
-    parentNumberToScrub = 67890;
-
-    parentString = '12345';
+    parentStringToEncrypt = '67890';
 
     @encrypt({
-      passphrase: 'passphrase'
+      passphrase: '8a14d4c6-5031-4115-8164-93ee1f1af60e'
     })
-    parentStringToScrub = '67890';
-
-    parentDate = new Date();
-
-    @encrypt({
-      passphrase: 'passphrase'
-    })
-    parentDateToScrub = new Date();
+    parentDateToEncrypt = new Date();
 
     child: ChildClass;
 
@@ -57,56 +47,37 @@ it('scrubs the properties that are decorated', () => {
   const toEncrypt = new ParentClass();
   const encrypted = encryptObject(toEncrypt);
 
-  expect(encrypted.parentNumber).toEqual(toEncrypt.parentNumber);
-  expect(encrypted.parentNumberToScrub).toEqual(8675309);
-  expect(encrypted.parentString).toEqual(toEncrypt.parentString);
-  expect(encrypted.parentStringToScrub).toEqual('********');
-  expect(encrypted.parentDate).toEqual(toEncrypt.parentDate);
-  expect(encrypted.parentDateToScrub).toEqual(new Date(9999, 11, 31));
-  expect(encrypted.parentPropToScrubWithCustomScrubber).toEqual(
-    'spenser was not here'
+  expect(encrypted.parentNumberToEncrypt).toEqual(
+    'U2FsdGVkX19+azaUuJ2jDiaYh5VnesgOOQ7ilDY+mFI='
   );
+  expect(encrypted.parentStringToEncrypt).toEqual('********');
+  expect(encrypted.parentDateToEncrypt).toEqual(new Date(9999, 11, 31));
 
-  expect(encrypted.child.childNumber).toEqual(toEncrypt.child.childNumber);
-  expect(encrypted.child.childNumberToScrub).toEqual(8675309);
-  expect(encrypted.child.childString).toEqual(toEncrypt.child.childString);
-  expect(encrypted.child.childStringToScrub).toEqual('********');
-  expect(encrypted.child.childDate).toEqual(toEncrypt.child.childDate);
-  expect(encrypted.child.childDateToScrub).toEqual(new Date(9999, 11, 31));
-  expect(encrypted.child.childPropToScrubWithCustomScrubber).toEqual(
-    "spenser's child was not here"
-  );
+  expect(encrypted.child.childNumberToEncrypt).toEqual(8675309);
+  expect(encrypted.child.childStringToEncrypt).toEqual('********');
+  expect(encrypted.child.childDateToEncrypt).toEqual(new Date(9999, 11, 31));
 });
 
-describe('when a child object is decorated for scrubbing', () => {
-  it('recursively scrubs child objects', () => {
+describe('when a child object is decorated for encrypting', () => {
+  it('recursively encrypts child object properties', () => {
     class ParentClass {
       @encrypt({
-        passphrase: 'passphrase'
+        passphrase: 'cad2a8da-ce2a-4092-929a-fe1e0e29ca0e'
       })
-      parentNumber = 12345;
+      parentNumberToEncrypt = 67890;
 
       @encrypt({
-        passphrase: 'passphrase'
+        passphrase: 'f7379bb7-65bb-4688-b98d-6fd9e607f1af'
       })
-      parentNumberToScrub = 67890;
-
-      parentString = '12345';
+      parentStringToEncrypt = '67890';
 
       @encrypt({
-        passphrase: 'passphrase'
+        passphrase: 'b23021c6-094b-4507-a0af-07a5c43ebbba'
       })
-      parentStringToScrub = '67890';
-
-      parentDate = new Date();
+      parentDateToEncrypt = new Date();
 
       @encrypt({
-        passphrase: 'passphrase'
-      })
-      parentDateToScrub = new Date();
-
-      @encrypt({
-        passphrase: 'passphrase'
+        passphrase: 'a4f19b64-cf96-4d5e-be9e-a1ab1ca47cac'
       })
       child: ChildClass;
 
@@ -118,24 +89,27 @@ describe('when a child object is decorated for scrubbing', () => {
     const toEncrypt = new ParentClass();
     const encrypted = encryptObject(toEncrypt);
 
-    expect(encrypted.parentNumber).toEqual(toEncrypt.parentNumber);
-    expect(encrypted.parentNumberToScrub).toEqual(8675309);
-    expect(encrypted.parentString).toEqual(toEncrypt.parentString);
-    expect(encrypted.parentStringToScrub).toEqual('********');
-    expect(encrypted.parentDate).toEqual(toEncrypt.parentDate);
-    expect(encrypted.parentDateToScrub).toEqual(new Date(9999, 11, 31));
-    expect(encrypted.parentPropToScrubWithCustomScrubber).toEqual(
-      'spenser was not here'
-    );
+    expect(encrypted.parentNumberToEncrypt).toEqual(8675309);
+    expect(encrypted.parentStringToEncrypt).toEqual('********');
+    expect(encrypted.parentDateToEncrypt).toEqual(new Date(9999, 11, 31));
 
-    expect(encrypted.child.childNumber).toEqual(toEncrypt.child.childNumber);
-    expect(encrypted.child.childNumberToScrub).toEqual(8675309);
-    expect(encrypted.child.childString).toEqual(toEncrypt.child.childString);
-    expect(encrypted.child.childStringToScrub).toEqual('********');
-    expect(encrypted.child.childDate).toEqual(toEncrypt.child.childDate);
-    expect(encrypted.child.childDateToScrub).toEqual(new Date(9999, 11, 31));
-    expect(encrypted.child.childPropToScrubWithCustomScrubber).toEqual(
-      "spenser's child was not here"
-    );
+    expect(encrypted.child.childNumberToEncrypt).toEqual(8675309);
+    expect(encrypted.child.childStringToEncrypt).toEqual('********');
+    expect(encrypted.child.childDateToEncrypt).toEqual(new Date(9999, 11, 31));
   });
+});
+
+it('should encrypt', () => {
+  const value = 67890;
+  const passphrase = '5e60d03d-0061-45a9-b328-16f53f01401c';
+
+  const encrypted = AES.encrypt(value.toString(), passphrase);
+
+  expect(encrypted.toString()).not.toEqual(value.toString());
+
+  const decrypted = AES.decrypt(encrypted, passphrase).toString(
+    CryptoJS.enc.Utf8
+  );
+
+  expect(parseInt(decrypted)).toEqual(value);
 });
