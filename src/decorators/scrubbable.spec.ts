@@ -1,22 +1,58 @@
-import { scrub } from './scrub';
+import { chance } from '../../chanceSetup';
+import { scrubToJSON, scrubToString } from '../scrubbers/scrubberUtils';
 import { scrubbable } from './scrubbable';
 
-it('passes', () => {
-  @scrubbable
-  class Scrubbable {
-    @scrub()
-    propToScrub = 'my string';
+jest.mock('../scrubbers/scrubberUtils');
 
-    propTwo: string;
+const scrubToStringMock = scrubToString as jest.Mock;
+const scrubToJSONMock = scrubToJSON as jest.Mock;
 
-    constructor () {
-      this.propTwo = 'prop two';
-    }
-  }
+@scrubbable
+class TestClass extends Object {}
 
-  console.log(new Scrubbable());
-  console.log(new Scrubbable().toString());
-  console.log(JSON.parse(new Scrubbable().toString()).propToScrub);
+describe('when getting the string value of the object', () => {
+  let actual: any;
+  let testClass: TestClass;
+  let expected: string;
 
-  expect(true).toEqual(true);
+  beforeEach(() => {
+    expected = chance.string();
+    scrubToStringMock.mockReturnValue(expected);
+
+    testClass = new TestClass();
+    actual = testClass.toString();
+  });
+
+  it('gets the string representation of the object', () => {
+    expect(scrubToStringMock).toHaveBeenCalledTimes(1);
+    expect(scrubToStringMock).toHaveBeenCalledWith(testClass);
+  });
+
+  it('returns the string representation of the object', () => {
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('when getting the json value of the object', () => {
+  let actual: any;
+  let testClass: TestClass;
+  let expected: any;
+
+  beforeEach(() => {
+    expected = { [chance.string()]: chance.string() };
+    scrubToJSONMock.mockReturnValue(expected);
+
+    testClass = new TestClass();
+    // @ts-ignore
+    actual = testClass.toJSON();
+  });
+
+  it('gets the string representation of the object', () => {
+    expect(scrubToJSONMock).toHaveBeenCalledTimes(1);
+    expect(scrubToJSONMock).toHaveBeenCalledWith(testClass);
+  });
+
+  it('returns the string representation of the object', () => {
+    expect(actual).toEqual(expected);
+  });
 });
