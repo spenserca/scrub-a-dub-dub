@@ -1,5 +1,6 @@
 import { AES } from 'crypto-js';
 import { EncryptionOptions } from '../decorators/encrypt';
+import { getPassphrase } from '../services/passphraseService';
 
 const encryptString = (toEncrypt: string, passphrase: string): string => {
   let secretPassphrase = 'passphrase';
@@ -13,6 +14,7 @@ export const encryptValue = (
   toEncrypt: any,
   metadataForProperty: EncryptionOptions
 ): any => {
-  const secretPassphrase = metadataForProperty.passphrase;
+  const secretPassphrase = getPassphrase(metadataForProperty);
+
   return AES.encrypt(toEncrypt.toString(), secretPassphrase).toString();
 };

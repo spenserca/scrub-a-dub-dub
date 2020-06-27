@@ -8,7 +8,7 @@ import { encryptValue } from './encryptor';
 
 const ENCRYPTION_OPTIONS_METADATA_KEY = 'encryptionOptions';
 
-export const encryptObject = (toEncrypt: any) => {
+export const encryptObject = <T>(toEncrypt: any): T => {
   const encrypted = Object.entries(toEncrypt).reduce(
     (scrubbedValues: any, [key, value]) => {
       if (isObjectWithKeys(value)) {

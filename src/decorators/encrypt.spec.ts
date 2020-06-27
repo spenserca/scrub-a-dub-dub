@@ -10,7 +10,7 @@ let options: any;
 
 beforeEach(() => {
   const passphrase = chance.string();
-  options = { passphrase };
+  options = { passphraseGenerator: passphrase };
 
   actual = encrypt(options);
 });
