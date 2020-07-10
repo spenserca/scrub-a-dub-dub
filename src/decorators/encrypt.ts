@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-type PassPhraseGenerator = () => string;
+type PassPhraseGenerator = (params?: any) => string;
 
 export interface EncryptionOptions {
   passphraseGenerator: string | PassPhraseGenerator;
