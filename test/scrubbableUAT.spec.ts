@@ -18,9 +18,9 @@ class ChildClass {
   childDateToScrub = new Date();
 
   @scrub({
-    scrubFunction: () => "spenser's child was not here"
+    scrubFunction: () => 'child was not here'
   })
-  childPropToScrubWithCustomScrubber = "spenser's child was here";
+  childPropToScrubWithCustomScrubber = 'child was here';
 }
 
 it('scrubs the properties that are decorated', () => {
@@ -75,7 +75,7 @@ it('scrubs the properties that are decorated', () => {
     new Date(9999, 11, 31)
   );
   expect(scrubbed.child.childPropToScrubWithCustomScrubber).toEqual(
-    "spenser's child was not here"
+    'child was not here'
   );
 });
 
@@ -135,7 +135,7 @@ describe('when a child object is decorated for scrubbing', () => {
       new Date(9999, 11, 31)
     );
     expect(scrubbed.child.childPropToScrubWithCustomScrubber).toEqual(
-      "spenser's child was not here"
+      'child was not here'
     );
   });
 });
