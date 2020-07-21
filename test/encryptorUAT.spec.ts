@@ -1,4 +1,6 @@
 import { encrypt, encryptable } from '../src';
+import { decryptObject } from '../src/decryption/objectDecryptor';
+import { encryptObject } from '../src/encryption/objectEncryptor';
 
 class ChildClass {
   @encrypt({
@@ -15,6 +17,20 @@ class ChildClass {
     passphraseGenerator: 'childPassphrase3'
   })
   childDateToEncrypt = new Date();
+
+  constructor (instance?: ChildClass) {
+    if (instance) {
+      Object.entries(instance).forEach(([key, value]) => {
+        if (value.constructor) {
+          // @ts-ignore
+          this[key] = new value.constructor({ ...value });
+        } else {
+          // @ts-ignore
+          this[key] = value;
+        }
+      });
+    }
+  }
 }
 
 describe('when getting the string value the object', () => {
@@ -38,16 +54,32 @@ describe('when getting the string value the object', () => {
 
       child: ChildClass;
 
-      constructor () {
+      constructor (instance?: ParentClass) {
+        if (instance) {
+          Object.entries(instance).forEach(([key, value]) => {
+            if (value.constructor) {
+              // @ts-ignore
+              this[key] = new value.constructor({ ...value });
+            } else {
+              // @ts-ignore
+              this[key] = value;
+            }
+          });
+        }
+
         this.child = new ChildClass();
       }
     }
 
     const toEncrypt = new ParentClass();
-    const encrypted = JSON.parse(toEncrypt.toString());
+    const encrypted = encryptObject(ParentClass, toEncrypt);
 
     let parentNumberToEncrypt = 9876;
     expect(encrypted.parentNumberToEncrypt).not.toBe(parentNumberToEncrypt);
+
+    const decrypted = decryptObject(ParentClass, encrypted);
+    console.log(JSON.stringify(decrypted, null, 2));
+
     // expect(encrypted.parentStringToEncrypt).toEqual('********');
     // expect(encrypted.parentDateToEncrypt).toEqual(new Date(9999, 11, 31));
     //
