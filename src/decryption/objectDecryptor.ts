@@ -9,8 +9,10 @@ import { decryptValue } from './decryptor';
 
 const ENCRYPTION_OPTIONS_METADATA_KEY = 'encryptionOptions';
 
+export type Constructor<T extends {}> = new (...args: any[]) => T;
+
 export const decryptObject = <T extends Indexable>(
-  constructor: new (args: T) => T,
+  constructor: Constructor<T>,
   toDecrypt: T
 ): T => {
   const decrypted = Object.entries(toDecrypt).reduce(
@@ -31,6 +33,5 @@ export const decryptObject = <T extends Indexable>(
     {}
   );
 
-  let newValue = { ...toDecrypt, ...decrypted };
-  return new constructor(newValue);
+  return Object.assign(new constructor(), { ...toDecrypt, ...decrypted });
 };

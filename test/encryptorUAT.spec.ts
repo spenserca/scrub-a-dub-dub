@@ -18,19 +18,7 @@ class ChildClass {
   })
   childDateToEncrypt = new Date();
 
-  constructor (instance?: ChildClass) {
-    if (instance) {
-      Object.entries(instance).forEach(([key, value]) => {
-        if (value.constructor) {
-          // @ts-ignore
-          this[key] = new value.constructor({ ...value });
-        } else {
-          // @ts-ignore
-          this[key] = value;
-        }
-      });
-    }
-  }
+  constructor () {}
 }
 
 describe('when getting the string value the object', () => {
@@ -54,19 +42,7 @@ describe('when getting the string value the object', () => {
 
       child: ChildClass;
 
-      constructor (instance?: ParentClass) {
-        if (instance) {
-          Object.entries(instance).forEach(([key, value]) => {
-            if (value.constructor) {
-              // @ts-ignore
-              this[key] = new value.constructor({ ...value });
-            } else {
-              // @ts-ignore
-              this[key] = value;
-            }
-          });
-        }
-
+      constructor () {
         this.child = new ChildClass();
       }
     }

@@ -1,5 +1,6 @@
 import { Indexable } from '../../index';
 import { EncryptionOptions } from '../decorators/encrypt';
+import { Constructor } from '../decryption/objectDecryptor';
 import { isObjectWithKeys } from '../filters/objectFilter';
 import {
   getMetadataForProperty,
@@ -10,7 +11,7 @@ import { encryptValue } from './encryptor';
 const ENCRYPTION_OPTIONS_METADATA_KEY = 'encryptionOptions';
 
 export const encryptObject = <T extends Indexable>(
-  constructor: new (args: T) => T,
+  constructor: Constructor<T>,
   toEncrypt: T
 ): T => {
   const encrypted = Object.entries(toEncrypt).reduce(
@@ -31,6 +32,5 @@ export const encryptObject = <T extends Indexable>(
     {}
   );
 
-  let newValue = { ...toEncrypt, ...encrypted };
-  return new constructor(newValue);
+  return Object.assign(new constructor(), { ...toEncrypt, ...encrypted });
 };
