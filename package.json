@@ -9,10 +9,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc -p .",
-    "prettier:check": "prettier-standard --check",
-    "prettier:format": "prettier-standard --format",
+    "lint": "prettier-standard --check",
+    "format": "prettier-standard --format",
+    "format:staged": "prettier-standard --format --staged",
     "test": "jest",
-    "verify": "npm run prettier:format && npm run prettier:check && npm test"
+    "verify": "npm run format && npm run lint && npm test"
   },
   "publishConfig": {
     "access": "public",
