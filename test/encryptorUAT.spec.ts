@@ -49,11 +49,15 @@ describe('when getting the string value the object', () => {
 
     const toEncrypt = new ParentClass();
     const encrypted = encryptObject(ParentClass, toEncrypt);
+    const encryptedToString = JSON.parse(toEncrypt.toString());
+    const encryptedToJSON = JSON.parse(JSON.stringify(toEncrypt, null, 2));
 
     let parentNumberToEncrypt = 9876;
     expect(encrypted.parentNumberToEncrypt).not.toBe(parentNumberToEncrypt);
 
     const decrypted = decryptObject(ParentClass, encrypted);
+    const decryptedFromString = decryptObject(ParentClass, encryptedToString);
+    const decryptedToJSON = decryptObject(ParentClass, encryptedToJSON);
     console.log(JSON.stringify(decrypted, null, 2));
 
     // expect(encrypted.parentStringToEncrypt).toEqual('********');
