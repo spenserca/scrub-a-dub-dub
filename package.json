@@ -48,7 +48,7 @@
     "jest": "^25.5.1",
     "jest-when": "^2.7.2",
     "prettier-standard": "^16.3.0",
-    "semantic-release": "^16.0.4",
+    "semantic-release": "^17.2.3",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
   },
