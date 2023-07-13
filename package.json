@@ -45,7 +45,7 @@
     "@types/node": "^13.13.4",
     "chance": "^1.1.4",
     "husky": "^4.2.5",
-    "jest": "^25.5.1",
+    "jest": "^29.6.1",
     "jest-when": "^2.7.2",
     "prettier-standard": "^16.3.0",
     "semantic-release": "^17.2.3",
